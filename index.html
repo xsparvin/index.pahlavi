@@ -28,10 +28,13 @@
         
         /* Header Styles */
         header {
-            background: linear-gradient(to right, #2c3e50, #4a6491);
+            background: linear-gradient(135deg, #1e5799 0%, #207cca 51%, #2989d8 100%);
             color: white;
             padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
         .header-content {
@@ -46,12 +49,15 @@
         }
         
         .logo i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-left: 10px;
+            color: #a8e6cf;
         }
         
         .logo h1 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         
         nav ul {
@@ -61,38 +67,32 @@
         
         nav ul li {
             margin-right: 20px;
+            position: relative;
         }
         
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
         
         nav ul li a:hover {
             color: #a8e6cf;
+            background-color: rgba(255,255,255,0.1);
         }
         
         /* Hero Section */
         .hero {
-            background: url('https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            height: 300px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 350px;
             display: flex;
             align-items: center;
             color: white;
             text-align: center;
             position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
         }
         
         .hero-content {
@@ -102,52 +102,74 @@
         }
         
         .hero h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             max-width: 700px;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
+            line-height: 1.8;
         }
         
         .btn {
             display: inline-block;
-            background: #3498db;
+            background: linear-gradient(to right, #3498db, #2c3e50);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 28px;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
         .btn:hover {
-            background: #2980b9;
+            background: linear-gradient(to right, #2980b9, #1a2530);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
         
         /* Map Section */
         .map-section {
-            padding: 40px 0;
-            background-color: #f9f9f9;
+            padding: 50px 0;
+            background: linear-gradient(to bottom, #f9f9f9, #e8f4f8);
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
             color: #2c3e50;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            border-radius: 3px;
         }
         
         .map-container {
             height: 500px;
             background-color: #e0e0e0;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
         }
         
         #iran-air-map {
@@ -158,29 +180,38 @@
         .map-controls {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            align-items: center;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         
         .map-controls button {
-            background: #3498db;
+            background: linear-gradient(to right, #3498db, #2980b9);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
+            padding: 10px 18px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .map-controls button:hover {
-            background: #2980b9;
+            background: linear-gradient(to right, #2980b9, #1f618d);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         
         .city-selector {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -188,23 +219,36 @@
         .city-btn {
             background: #ecf0f1;
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
+            padding: 10px 18px;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .city-btn.active {
-            background: #3498db;
+            background: linear-gradient(to right, #3498db, #2c3e50);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .city-btn:hover:not(.active) {
+            background: #d5dbdb;
+            transform: translateY(-1px);
         }
         
         .map-legend {
             display: flex;
             justify-content: center;
-            margin-top: 15px;
+            margin-top: 20px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         
         .legend-item {
@@ -214,78 +258,115 @@
         }
         
         .legend-color {
-            width: 20px;
-            height: 20px;
-            margin-left: 5px;
-            border-radius: 3px;
+            width: 22px;
+            height: 22px;
+            margin-left: 8px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
         /* District Data Section */
         .district-section {
-            padding: 40px 0;
-            background-color: white;
+            padding: 50px 0;
+            background: linear-gradient(to bottom, #ffffff, #f5f9ff);
         }
         
         .district-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
         
         .district-card {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            padding: 25px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            border-top: 4px solid #3498db;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .district-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
         }
         
         .district-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        
+        .district-card:hover::before {
+            transform: scaleX(1);
         }
         
         .district-name {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: #2c3e50;
         }
         
         .district-aqi {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
         .district-status {
-            font-size: 1rem;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
         
         .district-recommendation {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #666;
-            margin-top: 10px;
+            margin-top: 15px;
+            line-height: 1.7;
         }
         
         /* Footer */
         footer {
-            background: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 30px 0 15px;
+            padding: 40px 0 20px;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 25px;
         }
         
         .footer-column h3 {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: #a8e6cf;
         }
         
         .footer-column ul {
@@ -293,24 +374,67 @@
         }
         
         .footer-column ul li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li i {
+            margin-left: 8px;
+            color: #a8e6cf;
         }
         
         .footer-column ul li a {
             color: #ddd;
             text-decoration: none;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
         }
         
         .footer-column ul li a:hover {
             color: #a8e6cf;
         }
         
+        .developer-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .developer-info p {
+            margin-bottom: 8px;
+        }
+        
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            background: #0088cc;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .telegram-link:hover {
+            background: #0077b5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .telegram-link i {
+            margin-right: 8px;
+        }
+        
         .copyright {
             text-align: center;
-            padding-top: 15px;
-            border-top: 1px solid #444;
-            font-size: 0.8rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
             color: #aaa;
         }
         
@@ -327,10 +451,15 @@
             
             nav ul {
                 justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px;
             }
             
             .hero h2 {
-                font-size: 1.7rem;
+                font-size: 2rem;
             }
             
             .hero p {
@@ -339,6 +468,29 @@
             
             .map-controls {
                 flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 300px;
+            }
+            
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+            
+            .district-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -390,11 +542,11 @@
             
             <div class="map-controls">
                 <div>
-                    <button id="refresh-data">بروزرسانی داده‌ها</button>
-                    <button id="auto-refresh">بروزرسانی خودکار</button>
+                    <button id="refresh-data"><i class="fas fa-sync-alt"></i> بروزرسانی داده‌ها</button>
+                    <button id="auto-refresh"><i class="fas fa-redo"></i> بروزرسانی خودکار</button>
                 </div>
                 <div>
-                    <span id="last-update">آخرین بروزرسانی: در حال بارگذاری...</span>
+                    <span id="last-update"><i class="far fa-clock"></i> آخرین بروزرسانی: در حال بارگذاری...</span>
                 </div>
             </div>
             <div class="map-container">
@@ -442,29 +594,37 @@
     <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="developer-info">
+                <p>توسعه داده شده توسط: <strong>xsparvin</strong></p>
+                <a href="https://t.me/xsfsociety" class="telegram-link" target="_blank">
+                    <i class="fab fa-telegram"></i> کانال تلگرام: xsfsociety
+                </a>
+            </div>
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>دسترسی سریع</h3>
                     <ul>
-                        <li><a href="#home">صفحه اصلی</a></li>
-                        <li><a href="#map">نقشه آلودگی</a></li>
-                        <li><a href="#districts">داده‌های منطقه‌ای</a></li>
+                        <li><a href="#home"><i class="fas fa-home"></i> صفحه اصلی</a></li>
+                        <li><a href="#map"><i class="fas fa-map"></i> نقشه آلودگی</a></li>
+                        <li><a href="#districts"><i class="fas fa-chart-bar"></i> داده‌های منطقه‌ای</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>لینک‌های مفید</h3>
                     <ul>
-                        <li><a href="#">سازمان حفاظت محیط زیست</a></li>
-                        <li><a href="#">وزارت بهداشت</a></li>
-                        <li><a href="#">شهرداری تهران</a></li>
-                        <li><a href="#">پایش آنلاین آلودگی هوا</a></li>
+                        <li><a href="#"><i class="fas fa-leaf"></i> سازمان حفاظت محیط زیست</a></li>
+                        <li><a href="#"><i class="fas fa-heartbeat"></i> وزارت بهداشت</a></li>
+                        <li><a href="#"><i class="fas fa-city"></i> شهرداری تهران</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> پایش آنلاین آلودگی هوا</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>اطلاعات تماس</h3>
+                    <h3>راهنمای شاخص کیفیت هوا</h3>
                     <ul>
-                        <li><i class="fas fa-phone"></i> تلفن: ۱۶۷</li>
-                        <li><i class="fas fa-map-marker-alt"></i> آدرس: تهران، میدان ولیعصر</li>
+                        <li><i class="fas fa-circle" style="color: #2ecc71;"></i> پاک (0-50)</li>
+                        <li><i class="fas fa-circle" style="color: #f1c40f;"></i> سالم (51-100)</li>
+                        <li><i class="fas fa-circle" style="color: #e67e22;"></i> ناسالم برای گروه‌های حساس (101-150)</li>
+                        <li><i class="fas fa-circle" style="color: #e74c3c;"></i> ناسالم (151-200)</li>
                     </ul>
                 </div>
             </div>
@@ -508,7 +668,7 @@
                 { name: "منطقه ۹", lat: 35.6747, lng: 51.3470, aqi: 155, level: "unhealthy" },
                 { name: "منطقه ۱۰", lat: 35.6892, lng: 51.3608, aqi: 142, level: "unhealthySensitive" },
                 { name: "منطقه ۱۱", lat: 35.6845, lng: 51.3888, aqi: 165, level: "unhealthy" },
-                { name: "منطقه １２", lat: 35.6868, lng: 51.4160, aqi: 188, level: "unhealthy" },
+                { name: "منطقه ۱۲", lat: 35.6868, lng: 51.4160, aqi: 188, level: "unhealthy" },
                 { name: "منطقه ۱۳", lat: 35.6578, lng: 51.3975, aqi: 205, level: "veryUnhealthy" },
                 { name: "منطقه ۱۴", lat: 35.6452, lng: 51.4630, aqi: 218, level: "veryUnhealthy" },
                 { name: "منطقه ۱۵", lat: 35.6345, lng: 51.4327, aqi: 195, level: "unhealthy" },
@@ -622,36 +782,37 @@
                 const iconHtml = `
                     <div style="
                         background-color: ${color}; 
-                        width: 25px; 
-                        height: 25px; 
+                        width: 30px; 
+                        height: 30px; 
                         border-radius: 50%; 
                         display: flex; 
                         align-items: center; 
                         justify-content: center;
                         color: white;
                         font-weight: bold;
-                        font-size: 10px;
-                        border: 2px solid white;
-                        box-shadow: 0 0 5px rgba(0,0,0,0.5);
+                        font-size: 11px;
+                        border: 3px solid white;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
                     ">${newAqi}</div>
                 `;
                 
                 const customIcon = L.divIcon({
                     html: iconHtml,
                     className: 'aqi-marker',
-                    iconSize: [25, 25],
-                    iconAnchor: [12, 12]
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
                 });
                 
                 // Create marker with popup
                 const marker = L.marker([district.lat, district.lng], { icon: customIcon })
                     .addTo(map)
                     .bindPopup(`
-                        <div style="text-align: center;">
-                            <h3>${district.name}</h3>
-                            <p>شاخص کیفیت هوا: <strong>${newAqi}</strong></p>
-                            <p>وضعیت: <strong>${getLevelText(level)}</strong></p>
-                            <p>${getRecommendation(level)}</p>
+                        <div style="text-align: center; min-width: 200px;">
+                            <h3 style="margin-bottom: 10px; color: #2c3e50;">${district.name}</h3>
+                            <p style="margin: 5px 0;">شاخص کیفیت هوا: <strong style="font-size: 1.2em;">${newAqi}</strong></p>
+                            <p style="margin: 5px 0;">وضعیت: <strong>${getLevelText(level)}</strong></p>
+                            <hr style="margin: 10px 0;">
+                            <p style="font-size: 0.9em; color: #666;">${getRecommendation(level)}</p>
                         </div>
                     `);
                 
@@ -764,9 +925,11 @@
                 clearInterval(autoRefreshInterval);
                 autoRefreshInterval = null;
                 button.textContent = 'بروزرسانی خودکار';
+                button.innerHTML = '<i class="fas fa-redo"></i> بروزرسانی خودکار';
             } else {
                 autoRefreshInterval = setInterval(updateMapData, 30000); // Update every 30 seconds
                 button.textContent = 'توقف بروزرسانی خودکار';
+                button.innerHTML = '<i class="fas fa-stop"></i> توقف بروزرسانی خودکار';
             }
         }
         
