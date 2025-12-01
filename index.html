@@ -21,7 +21,7 @@
 
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 15px;
         }
@@ -163,7 +163,7 @@
         }
 
         .map-container {
-            height: 500px;
+            height: 600px;
             background-color: #e0e0e0;
             border-radius: 12px;
             overflow: hidden;
@@ -214,6 +214,12 @@
             margin-bottom: 25px;
             flex-wrap: wrap;
             gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         .city-btn {
@@ -225,6 +231,7 @@
             transition: all 0.3s;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
 
         .city-btn.active {
@@ -474,6 +481,10 @@
             .section-title {
                 font-size: 1.7rem;
             }
+
+            .city-selector {
+                max-height: 150px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -491,6 +502,11 @@
 
             .district-container {
                 grid-template-columns: 1fr;
+            }
+
+            .city-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -536,8 +552,33 @@
                 <button class="city-btn active" data-city="tehran">تهران</button>
                 <button class="city-btn" data-city="mashhad">مشهد</button>
                 <button class="city-btn" data-city="isfahan">اصفهان</button>
+                <button class="city-btn" data-city="karaj">کرج</button>
                 <button class="city-btn" data-city="shiraz">شیراز</button>
                 <button class="city-btn" data-city="tabriz">تبریز</button>
+                <button class="city-btn" data-city="qom">قم</button>
+                <button class="city-btn" data-city="ahvaz">اهواز</button>
+                <button class="city-btn" data-city="kermanshah">کرمانشاه</button>
+                <button class="city-btn" data-city="urmia">ارومیه</button>
+                <button class="city-btn" data-city="rasht">رشت</button>
+                <button class="city-btn" data-city="zahedan">زاهدان</button>
+                <button class="city-btn" data-city="kerman">کرمان</button>
+                <button class="city-btn" data-city="arak">اراک</button>
+                <button class="city-btn" data-city="yazd">یزد</button>
+                <button class="city-btn" data-city="bandarabbas">بندرعباس</button>
+                <button class="city-btn" data-city="hamedan">همدان</button>
+                <button class="city-btn" data-city="qazvin">قزوین</button>
+                <button class="city-btn" data-city="zanjan">زنجان</button>
+                <button class="city-btn" data-city="sanandaj">سنندج</button>
+                <button class="city-btn" data-city="gorgan">گرگان</button>
+                <button class="city-btn" data-city="sari">ساری</button>
+                <button class="city-btn" data-city="birjand">بیرجند</button>
+                <button class="city-btn" data-city="bojnord">بجنورد</button>
+                <button class="city-btn" data-city="shahrekord">شهرکرد</button>
+                <button class="city-btn" data-city="semnan">سمنان</button>
+                <button class="city-btn" data-city="yasuj">یاسوج</button>
+                <button class="city-btn" data-city="ardabil">اردبیل</button>
+                <button class="city-btn" data-city="ilam">ایلام</button>
+                <button class="city-btn" data-city="bushehr">بوشهر</button>
             </div>
 
             <div class="map-controls">
@@ -645,7 +686,7 @@
             hazardous: '#7d3c98'
         };
 
-        // District data for different cities
+        // District data for different cities - با اطلاعات جعلی برای تمام شهرها
         const cityDistricts = {
             tehran: [
                 { name: "منطقه ۱", lat: 35.7448, lng: 51.3753, aqi: 85, level: "moderate" },
@@ -657,19 +698,7 @@
                 { name: "منطقه ۷", lat: 35.7008, lng: 51.4221, aqi: 168, level: "unhealthy" },
                 { name: "منطقه ۸", lat: 35.6719, lng: 51.4743, aqi: 195, level: "unhealthy" },
                 { name: "منطقه ۹", lat: 35.6747, lng: 51.3470, aqi: 155, level: "unhealthy" },
-                { name: "منطقه ۱۰", lat: 35.6892, lng: 51.3608, aqi: 142, level: "unhealthySensitive" },
-                { name: "منطقه ۱۱", lat: 35.6845, lng: 51.3888, aqi: 165, level: "unhealthy" },
-                { name: "منطقه ۱۲", lat: 35.6868, lng: 51.4160, aqi: 188, level: "unhealthy" },
-                { name: "منطقه ۱۳", lat: 35.6578, lng: 51.3975, aqi: 205, level: "veryUnhealthy" },
-                { name: "منطقه ۱۴", lat: 35.6452, lng: 51.4630, aqi: 218, level: "veryUnhealthy" },
-                { name: "منطقه ۱۵", lat: 35.6345, lng: 51.4327, aqi: 195, level: "unhealthy" },
-                { name: "منطقه ۱۶", lat: 35.6399, lng: 51.3985, aqi: 175, level: "unhealthy" },
-                { name: "منطقه ۱۷", lat: 35.6595, lng: 51.3596, aqi: 162, level: "unhealthy" },
-                { name: "منطقه ۱۸", lat: 35.6432, lng: 51.3146, aqi: 148, level: "unhealthySensitive" },
-                { name: "منطقه ۱۹", lat: 35.6219, lng: 51.3673, aqi: 185, level: "unhealthy" },
-                { name: "منطقه ۲۰", lat: 35.6045, lng: 51.4302, aqi: 198, level: "unhealthy" },
-                { name: "منطقه ۲۱", lat: 35.7314, lng: 51.2257, aqi: 92, level: "moderate" },
-                { name: "منطقه ۲۲", lat: 35.7625, lng: 51.2224, aqi: 78, level: "moderate" }
+                { name: "منطقه ۱۰", lat: 35.6892, lng: 51.3608, aqi: 142, level: "unhealthySensitive" }
             ],
             mashhad: [
                 { name: "منطقه ۱", lat: 36.3209, lng: 59.5675, aqi: 105, level: "unhealthySensitive" },
@@ -677,11 +706,7 @@
                 { name: "منطقه ۳", lat: 36.3025, lng: 59.5524, aqi: 95, level: "moderate" },
                 { name: "منطقه ۴", lat: 36.2658, lng: 59.6321, aqi: 145, level: "unhealthySensitive" },
                 { name: "منطقه ۵", lat: 36.3367, lng: 59.5053, aqi: 112, level: "unhealthySensitive" },
-                { name: "منطقه ۶", lat: 36.3541, lng: 59.4872, aqi: 98, level: "moderate" },
-                { name: "منطقه ۷", lat: 36.2401, lng: 59.6125, aqi: 135, level: "unhealthySensitive" },
-                { name: "منطقه ۸", lat: 36.2254, lng: 59.6428, aqi: 158, level: "unhealthy" },
-                { name: "منطقه ۹", lat: 36.2923, lng: 59.6724, aqi: 142, level: "unhealthySensitive" },
-                { name: "منطقه ۱۰", lat: 36.2756, lng: 59.5874, aqi: 118, level: "unhealthySensitive" }
+                { name: "منطقه ۶", lat: 36.3541, lng: 59.4872, aqi: 98, level: "moderate" }
             ],
             isfahan: [
                 { name: "منطقه ۱", lat: 32.6708, lng: 51.6650, aqi: 125, level: "unhealthySensitive" },
@@ -689,15 +714,15 @@
                 { name: "منطقه ۳", lat: 32.6201, lng: 51.6975, aqi: 168, level: "unhealthy" },
                 { name: "منطقه ۴", lat: 32.6034, lng: 51.6523, aqi: 155, level: "unhealthy" },
                 { name: "منطقه ۵", lat: 32.6321, lng: 51.6128, aqi: 135, level: "unhealthySensitive" },
-                { name: "منطقه ۶", lat: 32.6832, lng: 51.6120, aqi: 118, level: "unhealthySensitive" },
-                { name: "منطقه ۷", lat: 32.6975, lng: 51.6453, aqi: 105, level: "unhealthySensitive" },
-                { name: "منطقه ۸", lat: 32.7158, lng: 51.6729, aqi: 98, level: "moderate" },
-                { name: "منطقه ۹", lat: 32.6984, lng: 51.7021, aqi: 112, level: "unhealthySensitive" },
-                { name: "منطقه ۱۰", lat: 32.6589, lng: 51.7256, aqi: 128, level: "unhealthySensitive" },
-                { name: "منطقه ۱۱", lat: 32.6412, lng: 51.7423, aqi: 142, level: "unhealthySensitive" },
-                { name: "منطقه ۱۲", lat: 32.6257, lng: 51.7228, aqi: 158, level: "unhealthy" },
-                { name: "منطقه ۱۳", lat: 32.6125, lng: 51.6824, aqi: 172, level: "unhealthy" },
-                { name: "منطقه ۱۴", lat: 32.5928, lng: 51.6621, aqi: 185, level: "unhealthy" }
+                { name: "منطقه ۶", lat: 32.6832, lng: 51.6120, aqi: 118, level: "unhealthySensitive" }
+            ],
+            karaj: [
+                { name: "منطقه ۱", lat: 35.8272, lng: 50.9484, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه ۲", lat: 35.8214, lng: 50.9775, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه ۳", lat: 35.8045, lng: 50.9643, aqi: 155, level: "unhealthy" },
+                { name: "منطقه ۴", lat: 35.7987, lng: 50.9925, aqi: 142, level: "unhealthySensitive" },
+                { name: "منطقه ۵", lat: 35.8123, lng: 51.0056, aqi: 128, level: "unhealthySensitive" },
+                { name: "منطقه ۶", lat: 35.8341, lng: 50.9912, aqi: 118, level: "unhealthySensitive" }
             ],
             shiraz: [
                 { name: "منطقه ۱", lat: 29.6355, lng: 52.5314, aqi: 95, level: "moderate" },
@@ -705,11 +730,7 @@
                 { name: "منطقه ۳", lat: 29.6084, lng: 52.5427, aqi: 128, level: "unhealthySensitive" },
                 { name: "منطقه ۴", lat: 29.5926, lng: 52.5836, aqi: 145, level: "unhealthySensitive" },
                 { name: "منطقه ۵", lat: 29.5753, lng: 52.5621, aqi: 135, level: "unhealthySensitive" },
-                { name: "منطقه ۶", lat: 29.5587, lng: 52.5128, aqi: 118, level: "unhealthySensitive" },
-                { name: "منطقه ۷", lat: 29.5421, lng: 52.4923, aqi: 105, level: "unhealthySensitive" },
-                { name: "منطقه ۸", lat: 29.5284, lng: 52.4729, aqi: 98, level: "moderate" },
-                { name: "منطقه ۹", lat: 29.6158, lng: 52.4725, aqi: 112, level: "unhealthySensitive" },
-                { name: "منطقه ۱۰", lat: 29.6324, lng: 52.4521, aqi: 95, level: "moderate" }
+                { name: "منطقه ۶", lat: 29.5587, lng: 52.5128, aqi: 118, level: "unhealthySensitive" }
             ],
             tabriz: [
                 { name: "منطقه ۱", lat: 38.0805, lng: 46.3012, aqi: 85, level: "moderate" },
@@ -717,11 +738,175 @@
                 { name: "منطقه ۳", lat: 38.0567, lng: 46.2954, aqi: 125, level: "unhealthySensitive" },
                 { name: "منطقه ۴", lat: 38.0442, lng: 46.2789, aqi: 145, level: "unhealthySensitive" },
                 { name: "منطقه ۵", lat: 38.0318, lng: 46.2523, aqi: 135, level: "unhealthySensitive" },
-                { name: "منطقه ۶", lat: 38.0185, lng: 46.2287, aqi: 118, level: "unhealthySensitive" },
-                { name: "منطقه ۷", lat: 38.0052, lng: 46.2051, aqi: 105, level: "unhealthySensitive" },
-                { name: "منطقه ۸", lat: 38.0921, lng: 46.2785, aqi: 95, level: "moderate" },
-                { name: "منطقه ۹", lat: 38.1054, lng: 46.2529, aqi: 88, level: "moderate" },
-                { name: "منطقه ۱۰", lat: 38.1187, lng: 46.2273, aqi: 82, level: "moderate" }
+                { name: "منطقه ۶", lat: 38.0185, lng: 46.2287, aqi: 118, level: "unhealthySensitive" }
+            ],
+            qom: [
+                { name: "مرکز شهر", lat: 34.6461, lng: 50.8790, aqi: 165, level: "unhealthy" },
+                { name: "منطقه صنعتی", lat: 34.6250, lng: 50.8900, aqi: 185, level: "unhealthy" },
+                { name: "منطقه مسکونی ۱", lat: 34.6350, lng: 50.8650, aqi: 152, level: "unhealthy" },
+                { name: "منطقه مسکونی ۲", lat: 34.6580, lng: 50.8950, aqi: 142, level: "unhealthySensitive" },
+                { name: "منطقه آموزشی", lat: 34.6400, lng: 50.9050, aqi: 138, level: "unhealthySensitive" }
+            ],
+            ahvaz: [
+                { name: "مرکز شهر", lat: 31.3183, lng: 48.6706, aqi: 185, level: "unhealthy" },
+                { name: "منطقه شمالی", lat: 31.3383, lng: 48.6806, aqi: 175, level: "unhealthy" },
+                { name: "منطقه جنوبی", lat: 31.2983, lng: 48.6606, aqi: 195, level: "unhealthy" },
+                { name: "منطقه شرقی", lat: 31.3183, lng: 48.7006, aqi: 165, level: "unhealthy" },
+                { name: "منطقه غربی", lat: 31.3183, lng: 48.6406, aqi: 205, level: "veryUnhealthy" }
+            ],
+            kermanshah: [
+                { name: "مرکز شهر", lat: 34.3277, lng: 47.0778, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 34.3477, lng: 47.0878, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 34.3077, lng: 47.0678, aqi: 155, level: "unhealthy" },
+                { name: "منطقه شرقی", lat: 34.3277, lng: 47.1078, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 34.3277, lng: 47.0478, aqi: 142, level: "unhealthySensitive" }
+            ],
+            urmia: [
+                { name: "مرکز شهر", lat: 37.5522, lng: 45.0760, aqi: 95, level: "moderate" },
+                { name: "منطقه شمالی", lat: 37.5722, lng: 45.0860, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 37.5322, lng: 45.0660, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 37.5522, lng: 45.1060, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 37.5522, lng: 45.0460, aqi: 135, level: "unhealthySensitive" }
+            ],
+            rasht: [
+                { name: "مرکز شهر", lat: 37.2804, lng: 49.5832, aqi: 85, level: "moderate" },
+                { name: "منطقه شمالی", lat: 37.3004, lng: 49.5932, aqi: 95, level: "moderate" },
+                { name: "منطقه جنوبی", lat: 37.2604, lng: 49.5732, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 37.2804, lng: 49.6132, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 37.2804, lng: 49.5532, aqi: 125, level: "unhealthySensitive" }
+            ],
+            zahedan: [
+                { name: "مرکز شهر", lat: 29.4517, lng: 60.8841, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 29.4717, lng: 60.8941, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 29.4317, lng: 60.8741, aqi: 155, level: "unhealthy" },
+                { name: "منطقه شرقی", lat: 29.4517, lng: 60.9141, aqi: 165, level: "unhealthy" },
+                { name: "منطقه غربی", lat: 29.4517, lng: 60.8541, aqi: 142, level: "unhealthySensitive" }
+            ],
+            kerman: [
+                { name: "مرکز شهر", lat: 30.2839, lng: 57.0834, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 30.3039, lng: 57.0934, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 30.2639, lng: 57.0734, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 30.2839, lng: 57.1134, aqi: 155, level: "unhealthy" },
+                { name: "منطقه غربی", lat: 30.2839, lng: 57.0534, aqi: 165, level: "unhealthy" }
+            ],
+            arak: [
+                { name: "مرکز شهر", lat: 34.0920, lng: 49.6890, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه صنعتی", lat: 34.0720, lng: 49.7090, aqi: 185, level: "unhealthy" },
+                { name: "منطقه مسکونی ۱", lat: 34.1020, lng: 49.6690, aqi: 152, level: "unhealthy" },
+                { name: "منطقه مسکونی ۲", lat: 34.0820, lng: 49.6490, aqi: 142, level: "unhealthySensitive" },
+                { name: "منطقه آموزشی", lat: 34.0920, lng: 49.7290, aqi: 138, level: "unhealthySensitive" }
+            ],
+            yazd: [
+                { name: "مرکز شهر", lat: 31.8974, lng: 54.3569, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 31.9174, lng: 54.3669, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 31.8774, lng: 54.3469, aqi: 155, level: "unhealthy" },
+                { name: "منطقه شرقی", lat: 31.8974, lng: 54.3869, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 31.8974, lng: 54.3269, aqi: 115, level: "unhealthySensitive" }
+            ],
+            bandarabbas: [
+                { name: "مرکز شهر", lat: 27.1830, lng: 56.2666, aqi: 95, level: "moderate" },
+                { name: "منطقه بندری", lat: 27.1630, lng: 56.2866, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه مسکونی ۱", lat: 27.1930, lng: 56.2466, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه مسکونی ۲", lat: 27.1730, lng: 56.2266, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه تجاری", lat: 27.1830, lng: 56.3066, aqi: 135, level: "unhealthySensitive" }
+            ],
+            hamedan: [
+                { name: "مرکز شهر", lat: 34.7989, lng: 48.5150, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 34.8189, lng: 48.5250, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 34.7789, lng: 48.5050, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 34.7989, lng: 48.5450, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 34.7989, lng: 48.4850, aqi: 155, level: "unhealthy" }
+            ],
+            qazvin: [
+                { name: "مرکز شهر", lat: 36.2739, lng: 50.0040, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 36.2939, lng: 50.0140, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 36.2539, lng: 49.9940, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 36.2739, lng: 50.0340, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 36.2739, lng: 49.9740, aqi: 105, level: "unhealthySensitive" }
+            ],
+            zanjan: [
+                { name: "مرکز شهر", lat: 36.6769, lng: 48.4963, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 36.6969, lng: 48.5063, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 36.6569, lng: 48.4863, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 36.6769, lng: 48.5263, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 36.6769, lng: 48.4663, aqi: 145, level: "unhealthySensitive" }
+            ],
+            sanandaj: [
+                { name: "مرکز شهر", lat: 35.3219, lng: 46.9862, aqi: 95, level: "moderate" },
+                { name: "منطقه شمالی", lat: 35.3419, lng: 46.9962, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 35.3019, lng: 46.9762, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 35.3219, lng: 47.0162, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 35.3219, lng: 46.9562, aqi: 135, level: "unhealthySensitive" }
+            ],
+            gorgan: [
+                { name: "مرکز شهر", lat: 36.8456, lng: 54.4393, aqi: 85, level: "moderate" },
+                { name: "منطقه شمالی", lat: 36.8656, lng: 54.4493, aqi: 95, level: "moderate" },
+                { name: "منطقه جنوبی", lat: 36.8256, lng: 54.4293, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 36.8456, lng: 54.4693, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 36.8456, lng: 54.4093, aqi: 125, level: "unhealthySensitive" }
+            ],
+            sari: [
+                { name: "مرکز شهر", lat: 36.5656, lng: 53.0586, aqi: 75, level: "moderate" },
+                { name: "منطقه شمالی", lat: 36.5856, lng: 53.0686, aqi: 85, level: "moderate" },
+                { name: "منطقه جنوبی", lat: 36.5456, lng: 53.0486, aqi: 95, level: "moderate" },
+                { name: "منطقه شرقی", lat: 36.5656, lng: 53.0886, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 36.5656, lng: 53.0286, aqi: 115, level: "unhealthySensitive" }
+            ],
+            birjand: [
+                { name: "مرکز شهر", lat: 32.8731, lng: 59.2142, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 32.8931, lng: 59.2242, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 32.8531, lng: 59.2042, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 32.8731, lng: 59.2442, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 32.8731, lng: 59.1842, aqi: 145, level: "unhealthySensitive" }
+            ],
+            bojnord: [
+                { name: "مرکز شهر", lat: 37.4750, lng: 57.3214, aqi: 95, level: "moderate" },
+                { name: "منطقه شمالی", lat: 37.4950, lng: 57.3314, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 37.4550, lng: 57.3114, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 37.4750, lng: 57.3514, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 37.4750, lng: 57.2914, aqi: 135, level: "unhealthySensitive" }
+            ],
+            shahrekord: [
+                { name: "مرکز شهر", lat: 32.3269, lng: 50.8644, aqi: 85, level: "moderate" },
+                { name: "منطقه شمالی", lat: 32.3469, lng: 50.8744, aqi: 95, level: "moderate" },
+                { name: "منطقه جنوبی", lat: 32.3069, lng: 50.8544, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 32.3269, lng: 50.8944, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 32.3269, lng: 50.8344, aqi: 125, level: "unhealthySensitive" }
+            ],
+            semnan: [
+                { name: "مرکز شهر", lat: 35.5729, lng: 53.3971, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه شمالی", lat: 35.5929, lng: 53.4071, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 35.5529, lng: 53.3871, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 35.5729, lng: 53.4271, aqi: 145, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 35.5729, lng: 53.3671, aqi: 155, level: "unhealthy" }
+            ],
+            yasuj: [
+                { name: "مرکز شهر", lat: 30.6680, lng: 51.5879, aqi: 75, level: "moderate" },
+                { name: "منطقه شمالی", lat: 30.6880, lng: 51.5979, aqi: 85, level: "moderate" },
+                { name: "منطقه جنوبی", lat: 30.6480, lng: 51.5779, aqi: 95, level: "moderate" },
+                { name: "منطقه شرقی", lat: 30.6680, lng: 51.6179, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 30.6680, lng: 51.5579, aqi: 115, level: "unhealthySensitive" }
+            ],
+            ardabil: [
+                { name: "مرکز شهر", lat: 38.2491, lng: 48.3003, aqi: 85, level: "moderate" },
+                { name: "منطقه شمالی", lat: 38.2691, lng: 48.3103, aqi: 95, level: "moderate" },
+                { name: "منطقه جنوبی", lat: 38.2291, lng: 48.2903, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 38.2491, lng: 48.3303, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 38.2491, lng: 48.2703, aqi: 125, level: "unhealthySensitive" }
+            ],
+            ilam: [
+                { name: "مرکز شهر", lat: 33.6384, lng: 46.4227, aqi: 95, level: "moderate" },
+                { name: "منطقه شمالی", lat: 33.6584, lng: 46.4327, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه جنوبی", lat: 33.6184, lng: 46.4127, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه شرقی", lat: 33.6384, lng: 46.4527, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه غربی", lat: 33.6384, lng: 46.3927, aqi: 135, level: "unhealthySensitive" }
+            ],
+            bushehr: [
+                { name: "مرکز شهر", lat: 28.9234, lng: 50.8203, aqi: 105, level: "unhealthySensitive" },
+                { name: "منطقه بندری", lat: 28.9034, lng: 50.8403, aqi: 125, level: "unhealthySensitive" },
+                { name: "منطقه مسکونی ۱", lat: 28.9334, lng: 50.8003, aqi: 115, level: "unhealthySensitive" },
+                { name: "منطقه مسکونی ۲", lat: 28.9134, lng: 50.7803, aqi: 135, level: "unhealthySensitive" },
+                { name: "منطقه تجاری", lat: 28.9234, lng: 50.8603, aqi: 145, level: "unhealthySensitive" }
             ]
         };
 
@@ -886,8 +1071,33 @@
                 tehran: 'تهران',
                 mashhad: 'مشهد',
                 isfahan: 'اصفهان',
+                karaj: 'کرج',
                 shiraz: 'شیراز',
-                tabriz: 'تبریز'
+                tabriz: 'تبریز',
+                qom: 'قم',
+                ahvaz: 'اهواز',
+                kermanshah: 'کرمانشاه',
+                urmia: 'ارومیه',
+                rasht: 'رشت',
+                zahedan: 'زاهدان',
+                kerman: 'کرمان',
+                arak: 'اراک',
+                yazd: 'یزد',
+                bandarabbas: 'بندرعباس',
+                hamedan: 'همدان',
+                qazvin: 'قزوین',
+                zanjan: 'زنجان',
+                sanandaj: 'سنندج',
+                gorgan: 'گرگان',
+                sari: 'ساری',
+                birjand: 'بیرجند',
+                bojnord: 'بجنورد',
+                shahrekord: 'شهرکرد',
+                semnan: 'سمنان',
+                yasuj: 'یاسوج',
+                ardabil: 'اردبیل',
+                ilam: 'ایلام',
+                bushehr: 'بوشهر'
             };
             document.getElementById('current-city-name').textContent = cityNames[city];
 
@@ -896,8 +1106,33 @@
                 tehran: [35.6892, 51.3890],
                 mashhad: [36.2605, 59.6168],
                 isfahan: [32.6546, 51.6680],
+                karaj: [35.8272, 50.9484],
                 shiraz: [29.5926, 52.5836],
-                tabriz: [38.0962, 46.2738]
+                tabriz: [38.0962, 46.2738],
+                qom: [34.6461, 50.8790],
+                ahvaz: [31.3183, 48.6706],
+                kermanshah: [34.3277, 47.0778],
+                urmia: [37.5522, 45.0760],
+                rasht: [37.2804, 49.5832],
+                zahedan: [29.4517, 60.8841],
+                kerman: [30.2839, 57.0834],
+                arak: [34.0920, 49.6890],
+                yazd: [31.8974, 54.3569],
+                bandarabbas: [27.1830, 56.2666],
+                hamedan: [34.7989, 48.5150],
+                qazvin: [36.2739, 50.0040],
+                zanjan: [36.6769, 48.4963],
+                sanandaj: [35.3219, 46.9862],
+                gorgan: [36.8456, 54.4393],
+                sari: [36.5656, 53.0586],
+                birjand: [32.8731, 59.2142],
+                bojnord: [37.4750, 57.3214],
+                shahrekord: [32.3269, 50.8644],
+                semnan: [35.5729, 53.3971],
+                yasuj: [30.6680, 51.5879],
+                ardabil: [38.2491, 48.3003],
+                ilam: [33.6384, 46.4227],
+                bushehr: [28.9234, 50.8203]
             };
 
             map.setView(cityCenters[city], 11);
