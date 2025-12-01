@@ -513,7 +513,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -532,7 +531,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
@@ -543,7 +541,6 @@
         </div>
     </section>
 
-    <!-- Map Section -->
     <section class="map-section" id="map">
         <div class="container">
             <h2 class="section-title">نقشه زنده آلودگی هوای ایران</h2>
@@ -622,17 +619,14 @@
         </div>
     </section>
 
-    <!-- District Data Section -->
     <section class="district-section" id="districts">
         <div class="container">
             <h2 class="section-title">وضعیت آلودگی هوا در مناطق مختلف <span id="current-city-name">تهران</span></h2>
             <div class="district-container" id="district-container">
-                <!-- District cards will be populated by JavaScript -->
-            </div>
+                </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="developer-info">
@@ -686,7 +680,7 @@
             hazardous: '#7d3c98'
         };
 
-        // District data for different cities - با اطلاعات جعلی برای تمام شهرها
+        // District data for different cities - با اطلاعات جعلی و **ثابت**
         const cityDistricts = {
             tehran: [
                 { name: "منطقه ۱", lat: 35.7448, lng: 51.3753, aqi: 85, level: "moderate" },
@@ -914,6 +908,7 @@
         const markers = [];
         let currentCity = 'tehran';
 
+        // **تابع بروزرسانی داده‌ها (بهینه‌سازی‌شده برای AQI ثابت)**
         function updateMapData() {
             // Clear existing markers
             markers.forEach(marker => map.removeLayer(marker));
@@ -922,11 +917,11 @@
             // Get current city districts
             const districts = cityDistricts[currentCity];
 
-            // Add markers for each district with simulated real-time data
+            // Add markers for each district using the initial (static) 'aqi' value
             districts.forEach(district => {
-                // Simulate slight changes in AQI for realism
-                const randomChange = Math.floor(Math.random() * 21) - 10; // -10 to +10
-                const newAqi = Math.max(0, Math.min(500, district.aqi + randomChange));
+                
+                // **تغییر اعمال شد: حذف شبیه‌سازی تصادفی**
+                const newAqi = district.aqi; 
 
                 // Determine AQI level based on value
                 let level, color;
@@ -950,7 +945,7 @@
                     color = aqiColors.hazardous;
                 }
 
-                // Update district data
+                // Update district data (for card display)
                 district.currentAqi = newAqi;
                 district.currentLevel = level;
 
@@ -1041,7 +1036,8 @@
                 const card = document.createElement('div');
                 card.className = 'district-card';
 
-                const aqi = district.currentAqi || district.aqi;
+                // استفاده از currentAqi که حالا ثابت است
+                const aqi = district.currentAqi || district.aqi; 
                 const level = district.currentLevel || district.level;
                 const color = aqiColors[level];
 
@@ -1191,3 +1187,4 @@
     </script>
 </body>
 </html>
+
