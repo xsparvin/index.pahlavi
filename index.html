@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سامانه پایش هوشمند آلودگی هوا | ۲۰۲۵</title>
+    <title>سامانه پایش هوشمند آلودگی هوا</title>
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -114,6 +114,46 @@
         
         .logo i {
             color: var(--primary);
+        }
+
+        /* Header Controls */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .header-btn:hover {
+            color: var(--primary);
+            background: var(--card-hover);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .header-btn:active {
+            transform: scale(0.95);
+        }
+
+        .header-divider {
+            width: 1px;
+            height: 24px;
+            background: var(--glass-border);
+            margin: 0 6px;
         }
         
         .theme-toggle {
@@ -542,6 +582,17 @@
                 width: 100%;
                 justify-content: center;
             }
+            .header-controls {
+                gap: 6px;
+            }
+            .header-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .header-divider {
+                margin: 0 4px;
+            }
         }
     </style>
 </head>
@@ -555,13 +606,14 @@
 
     <header>
         <div class="logo"><i class="fa-solid fa-wind"></i><span>هوای‌ما</span></div>
-        <div style="display: flex; align-items: center;">
-            <div class="theme-toggle" id="theme-btn" title="تغییر تم">
+        <div class="header-controls">
+            <button class="header-btn" id="theme-btn" title="تغییر تم">
                 <i class="fa-solid fa-moon"></i>
-            </div>
-            <div style="font-size: 1.2rem; cursor: pointer; color: var(--text-main);" onclick="document.getElementById('refresh-data').click()">
+            </button>
+            <div class="header-divider"></div>
+            <button class="header-btn" id="refresh-header-btn" title="بروزرسانی داده‌ها">
                 <i class="fa-solid fa-rotate"></i>
-            </div>
+            </button>
         </div>
     </header>
 
@@ -650,6 +702,13 @@
         // --- Configuration ---
         const API_URL = "https://air-quality-api.open-meteo.com/v1/air-quality";
         const WEATHER_URL = "https://api.open-meteo.com/v1/forecast";
+
+        // LocalStorage Keys
+        const STORAGE_KEYS = {
+            theme: 'airQualityTheme',
+            bookmarks: 'airQualityBookmarks',
+            lastLocation: 'airQualityLastLocation'
+        };
 
         // Full Data
         const cityData = {
@@ -1097,7 +1156,7 @@
         let isHeatmapActive = false;
         let currentDistrictsData = [];
         let trendChartInstance = null;
-        let savedBookmarks = JSON.parse(localStorage.getItem('airQualityBookmarks')) || [];
+        let savedBookmarks = JSON.parse(localStorage.getItem(STORAGE_KEYS.bookmarks)) || [];
         const loader = document.getElementById('loading-overlay');
 
         const map = L.map('iran-air-map', {
@@ -1111,20 +1170,57 @@
         const themeBtn = document.getElementById('theme-btn');
         const themeIcon = themeBtn.querySelector('i');
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.getAttribute('data-theme') === 'light') {
-                html.setAttribute('data-theme', 'dark');
+        // Initialize theme from localStorage
+        function initTheme() {
+            const savedTheme = localStorage.getItem(STORAGE_KEYS.theme);
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            }
+        }
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
             } else {
-                html.setAttribute('data-theme', 'light');
                 themeIcon.classList.remove('fa-sun');
                 themeIcon.classList.add('fa-moon');
             }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            updateThemeIcon(newTheme);
+            // Save to localStorage
+            localStorage.setItem(STORAGE_KEYS.theme, newTheme);
             if (trendChartInstance) trendChartInstance.update();
         }
         themeBtn.addEventListener('click', toggleTheme);
+
+        // --- Location Persistence ---
+        function saveLastLocation(type, data) {
+            const locationData = {
+                type: type,
+                data: data,
+                timestamp: Date.now()
+            };
+            localStorage.setItem(STORAGE_KEYS.lastLocation, JSON.stringify(locationData));
+        }
+
+        function getLastLocation() {
+            const saved = localStorage.getItem(STORAGE_KEYS.lastLocation);
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch (e) {
+                    return null;
+                }
+            }
+            return null;
+        }
 
         // --- Fetch Functions ---
         async function fetchMultiLocations(districts) {
@@ -1151,7 +1247,7 @@
         }
 
         // --- Core Load Logic ---
-        async function loadData(type, payload) {
+        async function loadData(type, payload, saveToStorage = true) {
             loader.style.display = 'flex';
 
             // Cleanup Map
@@ -1171,6 +1267,12 @@
                     districtsToRender = city.districts;
                     centerLat = city.center[0];
                     centerLng = city.center[1];
+                    currentCity = payload;
+
+                    // Save to localStorage
+                    if (saveToStorage) {
+                        saveLastLocation('city', payload);
+                    }
 
                     // NEW: Fit Bounds to see all locations
                     const bounds = L.latLngBounds(districtsToRender.map(d => [d.lat, d.lng]));
@@ -1198,6 +1300,11 @@
                         lat: payload.lat,
                         lng: payload.lng
                     };
+
+                    // Save to localStorage
+                    if (saveToStorage) {
+                        saveLastLocation('custom', payload);
+                    }
                 }
 
                 // Weather
@@ -1590,7 +1697,7 @@
         }
 
         // --- Core Init & Event Listeners ---
-        function renderCitySelector() {
+        function renderCitySelector(selectedValue = null) {
             const dropdown = document.getElementById('city-dropdown');
             dropdown.innerHTML = '';
 
@@ -1600,7 +1707,7 @@
                 const opt = document.createElement('option');
                 opt.value = key;
                 opt.textContent = cityData[key].name;
-                if (key === currentCity) opt.selected = true;
+                if (selectedValue === key || (!selectedValue && key === currentCity)) opt.selected = true;
                 cityGroup.appendChild(opt);
             });
             dropdown.appendChild(cityGroup);
@@ -1612,6 +1719,7 @@
                     const opt = document.createElement('option');
                     opt.value = `bookmark-${index}`;
                     opt.textContent = `📌 ${bm.name}`;
+                    if (selectedValue === `bookmark-${index}`) opt.selected = true;
                     bkGroup.appendChild(opt);
                 });
                 dropdown.appendChild(bkGroup);
@@ -1622,6 +1730,10 @@
             custom.textContent = 'موقعیت سفارشی';
             custom.id = 'custom-opt';
             custom.hidden = true;
+            if (selectedValue === 'custom') {
+                custom.hidden = false;
+                custom.selected = true;
+            }
             dropdown.appendChild(custom);
 
             dropdown.onchange = (e) => {
@@ -1661,7 +1773,7 @@
                     lat: currentCustomLoc.lat,
                     lng: currentCustomLoc.lng
                 });
-                localStorage.setItem('airQualityBookmarks', JSON.stringify(savedBookmarks));
+                localStorage.setItem(STORAGE_KEYS.bookmarks, JSON.stringify(savedBookmarks));
                 renderCitySelector();
                 alert("مکان ذخیره شد!");
             }
@@ -1702,7 +1814,8 @@
             });
         });
 
-        document.getElementById('refresh-data').addEventListener('click', () => {
+        // Refresh button handlers (both header and map)
+        function handleRefresh() {
             const val = document.getElementById('city-dropdown').value;
             if (val.startsWith('bookmark-')) {
                 const idx = parseInt(val.split('-')[1]);
@@ -1711,18 +1824,50 @@
                     lat: bm.lat,
                     lng: bm.lng,
                     name: bm.name
-                });
+                }, false);
             } else if (val !== 'custom') {
-                loadData('city', val);
+                loadData('city', val, false);
             } else if (currentCustomLoc) {
                 loadData('custom', {...currentCustomLoc,
                     name: document.getElementById('health-city-name').textContent
-                });
+                }, false);
             }
-        });
+        }
 
-        renderCitySelector();
-        loadData('city', 'tehran');
+        document.getElementById('refresh-data').addEventListener('click', handleRefresh);
+        document.getElementById('refresh-header-btn').addEventListener('click', handleRefresh);
+
+        // --- Initialize App ---
+        function initApp() {
+            // Initialize theme first
+            initTheme();
+            
+            // Render city selector
+            renderCitySelector();
+            
+            // Check for saved location
+            const lastLocation = getLastLocation();
+            
+            if (lastLocation) {
+                if (lastLocation.type === 'city' && cityData[lastLocation.data]) {
+                    renderCitySelector(lastLocation.data);
+                    loadData('city', lastLocation.data, false);
+                } else if (lastLocation.type === 'custom' && lastLocation.data) {
+                    document.getElementById('custom-opt').hidden = false;
+                    renderCitySelector('custom');
+                    loadData('custom', lastLocation.data, false);
+                } else {
+                    // Fallback to Tehran
+                    loadData('city', 'tehran');
+                }
+            } else {
+                // Default to Tehran
+                loadData('city', 'tehran');
+            }
+        }
+
+        // Start the app
+        initApp();
     </script>
 </body>
 
