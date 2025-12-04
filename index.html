@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fa" dir="rtl" data-theme="light">
 
 <head>
@@ -17,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-         :root {
+        :root {
             /* Light Theme Variables */
             --primary: #2563eb;
             --bg-body: #f8fafc;
@@ -80,6 +81,7 @@
             max-width: 1400px;
             margin: 0 auto;
         }
+
         /* Header */
 
         header {
@@ -168,6 +170,7 @@
             color: var(--primary);
             transform: rotate(15deg);
         }
+
         /* Hero */
 
         .hero {
@@ -182,6 +185,7 @@
             margin-bottom: 20px;
             letter-spacing: -1px;
         }
+
         /* Dropdown */
 
         .city-selector-wrapper {
@@ -245,6 +249,7 @@
             pointer-events: none;
             transition: transform 0.3s;
         }
+
         /* Map */
 
         .map-wrapper {
@@ -305,6 +310,7 @@
             color: white;
             box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
         /* Weather Strip */
 
         .weather-strip {
@@ -332,34 +338,7 @@
         .weather-item i {
             color: var(--primary);
         }
-        /* Smart Insight Card */
 
-        .smart-insight-card {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
-        }
-
-        .insight-text h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .insight-text p {
-            opacity: 0.9;
-            font-size: 0.95rem;
-        }
-
-        .insight-icon {
-            font-size: 2.5rem;
-            opacity: 0.8;
-        }
         /* Health Widget */
 
         .activity-grid {
@@ -414,7 +393,8 @@
         .status-no {
             color: var(--aqi-unhealthy);
         }
-        /* Chart & Stats */
+
+        /* Stats Section & Forecast Cards (Daily & Hourly) */
 
         .stats-section {
             padding: 40px 0;
@@ -450,7 +430,8 @@
             box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
 
-        .chart-container-wrapper {
+        /* Common Forecast Container Style */
+        .forecast-container-wrapper {
             background: var(--card-bg);
             border-radius: 24px;
             padding: 25px;
@@ -459,6 +440,100 @@
             border: 1px solid var(--glass-border);
         }
 
+        .forecast-scroll {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+        }
+        
+        .forecast-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .forecast-scroll::-webkit-scrollbar-thumb {
+            background-color: var(--text-muted);
+            border-radius: 10px;
+        }
+
+        .forecast-card {
+            min-width: 140px;
+            background: var(--bg-body);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .forecast-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .forecast-date {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .forecast-day {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .forecast-aqi-badge {
+            font-size: 1.4rem;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 5px;
+            width: 100%;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .forecast-status {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--text-muted);
+        }
+
+        /* Styles for Hourly Cards (Smaller) */
+        .hourly-card {
+            min-width: 100px;
+            padding: 12px;
+            border-radius: 16px;
+            background: var(--card-bg); /* slightly clearer than daily */
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+        
+        .hourly-time {
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+        
+        .hourly-badge {
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 0;
+            display: inline-block;
+        }
+
+        /* Bento Grid for Pollutants */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -508,6 +583,7 @@
             color: var(--text-muted);
             font-weight: normal;
         }
+
         /* Loading Overlay */
 
         #loading-overlay {
@@ -527,6 +603,7 @@
             flex-direction: column;
             gap: 15px;
         }
+
         /* Marker */
 
         .marker-pin {
@@ -551,9 +628,11 @@
             0% {
                 box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
             }
+
             70% {
                 box-shadow: 0 0 0 15px rgba(37, 99, 235, 0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
             }
@@ -565,29 +644,36 @@
                 padding: 10px 20px;
                 top: 10px;
             }
+
             .hero h1 {
                 font-size: 2.2rem;
             }
+
             .map-wrapper {
                 height: 450px;
             }
+
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
+
             .big-share-btn {
                 width: 100%;
                 justify-content: center;
             }
+
             .header-controls {
                 gap: 6px;
             }
+
             .header-btn {
                 width: 36px;
                 height: 36px;
                 font-size: 1rem;
             }
+
             .header-divider {
                 margin: 0 4px;
             }
@@ -619,7 +705,7 @@
         <section class="hero">
             <div class="container">
                 <h1>پایش هوشمند کیفیت هوا</h1>
-                <p style="color:var(--aqi-unhealthy); font-weight:700;">⚠️ توجه: مقادیر آلودگی از طریق مدل‌های پیش‌بینی جهانی دریافت شده و ممکن است با داده‌های ایستگاه‌های محلی متفاوت باشد.</p>
+                <p style="color:var(--aqi-unhealthy); font-weight:700;">⚠️ توجه: مقادیر آلودگی از طریق سه منبع (مدل‌های جهانی، ایستگاه‌ها و اسکرپر اختصاصی) دریافت شده و بالاترین مقدار نمایش داده می‌شود.</p>
             </div>
         </section>
 
@@ -628,7 +714,7 @@
                 <div class="glass-select-container">
                     <i class="fa-solid fa-location-dot select-icon"></i>
                     <select id="city-dropdown" class="glass-select">
-                        </select>
+                    </select>
                     <i class="fa-solid fa-chevron-down arrow-icon"></i>
                 </div>
             </div>
@@ -650,14 +736,14 @@
             </div>
         </section>
 
-        <section class="container" id="smart-insight-section" style="display:none">
-            <div class="smart-insight-card">
-                <div class="insight-text">
-                    <h3><i class="fa-solid fa-clock-rotate-left"></i> پیش‌بینی هوشمند</h3>
-                    <p id="insight-message">در حال تحلیل...</p>
-                </div>
-                <div class="insight-icon">
-                    <i class="fa-solid fa-person-running"></i>
+        <!-- REPLACED SMART INSIGHT WITH HOURLY FORECAST SCROLL -->
+        <section class="container" id="hourly-forecast-section" style="display:none; margin-bottom: 30px;">
+            <div class="forecast-container-wrapper">
+                <h3 style="font-weight: 800; font-size: 1.1rem; color: var(--text-main); margin-bottom: 15px;">
+                    <i class="fa-regular fa-clock"></i> روند کیفیت هوا (۱۲ ساعت آینده)
+                </h3>
+                <div class="forecast-scroll" id="hourly-container">
+                    <!-- Hourly items injected here -->
                 </div>
             </div>
         </section>
@@ -680,14 +766,12 @@
                 </button>
             </div>
 
-            <div class="chart-container-wrapper">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                    <h3 style="font-weight: 800; font-size: 1.2rem; color: var(--text-main);">میانگین روزانه</h3>
-                    <span style="font-size: 0.8rem; color: var(--text-muted); background: var(--bg-body); padding: 4px 12px; border-radius: 20px;">۷ روزه</span>
-                </div>
-                <div style="height: 300px; width: 100%;">
-                    <canvas id="aqiTrendChart"></canvas>
-                </div>
+            <!-- Forecast Cards Section -->
+            <div class="forecast-container-wrapper">
+                 <h3 style="font-weight: 800; font-size: 1.2rem; color: var(--text-main); margin-bottom: 20px;">پیش‌بینی ۴ روز آینده (حداکثر آلودگی)</h3>
+                 <div class="forecast-scroll" id="forecast-container">
+                     <!-- Cards injected by JS -->
+                 </div>
             </div>
 
             <h3 style="margin-bottom: 20px; font-weight: 800; color: var(--text-main);">آنالیز آلاینده‌ها</h3>
@@ -699,6 +783,11 @@
         // --- Configuration ---
         const API_URL = "https://air-quality-api.open-meteo.com/v1/air-quality";
         const WEATHER_URL = "https://api.open-meteo.com/v1/forecast";
+        const WAQI_TOKEN = "9e3324ef211fa9a7801bd8696262dd20adf84238";
+        const WAQI_URL = "https://api.waqi.info/feed";
+        
+        // *** IMPORTANT: PASTE YOUR DEPLOYED CLOUDFLARE WORKER URL HERE ***
+        const WORKER_API_URL = "https://aqi.yebekhe.workers.dev"; 
 
         // LocalStorage Keys
         const STORAGE_KEYS = {
@@ -712,30 +801,95 @@
             tehran: {
                 name: "تهران",
                 center: [35.6892, 51.3890],
-                districts: [
-                    { name: "منطقه ۱ - شمیران", lat: 35.8080, lng: 51.4284 },
-                    { name: "منطقه ۲ - سعادت‌آباد", lat: 35.7769, lng: 51.3705 },
-                    { name: "منطقه ۳ - ونک", lat: 35.7584, lng: 51.3917 },
-                    { name: "منطقه ۴ - تهرانپارس", lat: 35.7512, lng: 51.5208 },
-                    { name: "منطقه ۵ - پونک", lat: 35.7681, lng: 51.3289 },
-                    { name: "منطقه ۶ - امیرآباد", lat: 35.7225, lng: 51.4010 },
-                    { name: "منطقه ۷ - سهروردی", lat: 35.7110, lng: 51.4390 },
-                    { name: "منطقه ۸ - نارمک", lat: 35.7489, lng: 51.5208 },
-                    { name: "منطقه ۹ - آزادی", lat: 35.7005, lng: 51.3533 },
-                    { name: "منطقه ۱۰ - نواب", lat: 35.6880, lng: 51.3810 },
-                    { name: "منطقه ۱۱ - انقلاب", lat: 35.7011, lng: 51.3916 },
-                    { name: "منطقه ۱۲ - بازار", lat: 35.6723, lng: 51.4225 },
-                    { name: "منطقه ۱۳ - پیروزی", lat: 35.6899, lng: 51.4795 },
-                    { name: "منطقه ۱۴ - شهدا", lat: 35.6690, lng: 51.4700 },
-                    { name: "منطقه ۱۵ - خاوران", lat: 35.6320, lng: 51.4580 },
-                    { name: "منطقه ۱۶ - نازی‌آباد", lat: 35.6200, lng: 51.4050 },
-                    { name: "منطقه ۱۷ - یافت‌آباد", lat: 35.6400, lng: 51.3000 },
-                    { name: "منطقه ۱۸ - شادآباد", lat: 35.6300, lng: 51.2700 },
-                    { name: "منطقه ۱۹ - دولت‌آباد", lat: 35.5800, lng: 51.3900 },
-                    { name: "منطقه ۲۰ - شهرری", lat: 35.5901, lng: 51.4394 },
-                    { name: "منطقه ۲۱ - چیتگر", lat: 35.7000, lng: 51.2100 },
-                    { name: "منطقه ۲۲ - دریاچه", lat: 35.7480, lng: 51.1850 }
-                ]
+                districts: [{
+                    name: "منطقه ۱ - شمیران",
+                    lat: 35.8080,
+                    lng: 51.4284
+                }, {
+                    name: "منطقه ۲ - سعادت‌آباد",
+                    lat: 35.7769,
+                    lng: 51.3705
+                }, {
+                    name: "منطقه ۳ - ونک",
+                    lat: 35.7584,
+                    lng: 51.3917
+                }, {
+                    name: "منطقه ۴ - تهرانپارس",
+                    lat: 35.7512,
+                    lng: 51.5208
+                }, {
+                    name: "منطقه ۵ - پونک",
+                    lat: 35.7681,
+                    lng: 51.3289
+                }, {
+                    name: "منطقه ۶ - امیرآباد",
+                    lat: 35.7225,
+                    lng: 51.4010
+                }, {
+                    name: "منطقه ۷ - سهروردی",
+                    lat: 35.7110,
+                    lng: 51.4390
+                }, {
+                    name: "منطقه ۸ - نارمک",
+                    lat: 35.7489,
+                    lng: 51.5208
+                }, {
+                    name: "منطقه ۹ - آزادی",
+                    lat: 35.7005,
+                    lng: 51.3533
+                }, {
+                    name: "منطقه ۱۰ - نواب",
+                    lat: 35.6880,
+                    lng: 51.3810
+                }, {
+                    name: "منطقه ۱۱ - انقلاب",
+                    lat: 35.7011,
+                    lng: 51.3916
+                }, {
+                    name: "منطقه ۱۲ - بازار",
+                    lat: 35.6723,
+                    lng: 51.4225
+                }, {
+                    name: "منطقه ۱۳ - پیروزی",
+                    lat: 35.6899,
+                    lng: 51.4795
+                }, {
+                    name: "منطقه ۱۴ - شهدا",
+                    lat: 35.6690,
+                    lng: 51.4700
+                }, {
+                    name: "منطقه ۱۵ - خاوران",
+                    lat: 35.6320,
+                    lng: 51.4580
+                }, {
+                    name: "منطقه ۱۶ - نازی‌آباد",
+                    lat: 35.6200,
+                    lng: 51.4050
+                }, {
+                    name: "منطقه ۱۷ - یافت‌آباد",
+                    lat: 35.6400,
+                    lng: 51.3000
+                }, {
+                    name: "منطقه ۱۸ - شادآباد",
+                    lat: 35.6300,
+                    lng: 51.2700
+                }, {
+                    name: "منطقه ۱۹ - دولت‌آباد",
+                    lat: 35.5800,
+                    lng: 51.3900
+                }, {
+                    name: "منطقه ۲۰ - شهرری",
+                    lat: 35.5901,
+                    lng: 51.4394
+                }, {
+                    name: "منطقه ۲۱ - چیتگر",
+                    lat: 35.7000,
+                    lng: 51.2100
+                }, {
+                    name: "منطقه ۲۲ - دریاچه",
+                    lat: 35.7480,
+                    lng: 51.1850
+                }]
             },
             mashhad: {
                 name: "مشهد",
@@ -1128,6 +1282,15 @@
             veryUnhealthy: '#a855f7',
             hazardous: '#7e22ce'
         };
+        
+        const aqiText = {
+            good: 'پاک',
+            moderate: 'قابل قبول',
+            sensitive: 'ناسالم حساس',
+            unhealthy: 'ناسالم',
+            veryUnhealthy: 'بسیار ناسالم',
+            hazardous: 'خطرناک'
+        };
 
         let currentCity = 'tehran';
         let currentCustomLoc = null;
@@ -1135,7 +1298,6 @@
         let heatLayer = null;
         let isHeatmapActive = false;
         let currentDistrictsData = [];
-        let trendChartInstance = null;
         let savedBookmarks = JSON.parse(localStorage.getItem(STORAGE_KEYS.bookmarks)) || [];
         const loader = document.getElementById('loading-overlay');
 
@@ -1174,9 +1336,7 @@
             const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
             html.setAttribute('data-theme', newTheme);
             updateThemeIcon(newTheme);
-            // Save to localStorage
             localStorage.setItem(STORAGE_KEYS.theme, newTheme);
-            if (trendChartInstance) trendChartInstance.update();
         }
         themeBtn.addEventListener('click', toggleTheme);
 
@@ -1201,52 +1361,159 @@
             }
             return null;
         }
+        
+        // --- Mapping Helper for Worker ---
+        function getWorkerCitySlug(key) {
+            const map = {
+                'bandarabbas': 'bandar-abbas'
+            };
+            return map[key] || key;
+        }
 
         // --- Fetch Functions ---
-        async function fetchMultiLocations(districts) {
-            // Check if there are more than 10 locations (Open-Meteo limit is usually ~10)
+        async function fetchMultiLocations(districts, cityKey = null) {
             const isMulti = districts.length > 1;
-            
+
             if (isMulti) {
-                // For city-wide data, fetch only the center or a subset to prevent API call failure/overload.
-                // NOTE: This is a hack because the API doesn't support 22 simultaneous locations.
-                // Fetching all 22 at once would exceed the URL length limit or API's multi-location limit.
-                // For demonstration, we'll take a safe subset of the first 10 locations.
+                // Open-Meteo Logic (Subset of 10)
                 const subset = districts.slice(0, 10);
                 const lats = subset.map(d => d.lat).join(',');
                 const lngs = subset.map(d => d.lng).join(',');
-                const url = `${API_URL}?latitude=${lats}&longitude=${lngs}&current=us_aqi,pm10,pm2_5,nitrogen_dioxide,sulphur_dioxide,ozone,carbon_monoxide&hourly=us_aqi&timezone=Asia/Tehran&past_days=2&forecast_days=5`;
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('API Error');
-                const data = await response.json();
+                const omUrl = `${API_URL}?latitude=${lats}&longitude=${lngs}&current=us_aqi,pm10,pm2_5,nitrogen_dioxide,sulphur_dioxide,ozone,carbon_monoxide&hourly=us_aqi&timezone=Asia/Tehran&past_days=1&forecast_days=6`;
 
-                // Merge the results back with the full district list for map rendering
+                // 1. Fetch Open-Meteo
+                const omResponse = await fetch(omUrl);
+                if (!omResponse.ok) throw new Error('API Error');
+                const omData = await omResponse.json();
+
+                // 2. Fetch WAQI Data in Parallel for the subset
+                const waqiPromises = subset.map(d =>
+                    fetch(`${WAQI_URL}/geo:${d.lat};${d.lng}/?token=${WAQI_TOKEN}`)
+                    .then(res => res.json())
+                    .catch(err => {
+                        console.error('WAQI Error:', err);
+                        return null;
+                    })
+                );
+                
+                // 3. Fetch Worker Data (Single City Value)
+                let workerPromise = Promise.resolve(null);
+                if (cityKey && WORKER_API_URL && WORKER_API_URL !== "YOUR_WORKER_URL_HERE") {
+                    const slug = getWorkerCitySlug(cityKey);
+                    workerPromise = fetch(`${WORKER_API_URL}?city=${slug}`)
+                        .then(res => res.json())
+                        .catch(err => {
+                            console.error('Worker Error:', err);
+                            return null;
+                        });
+                }
+
+                // Wait for everything
+                const [waqiResults, workerResult] = await Promise.all([
+                    Promise.all(waqiPromises),
+                    workerPromise
+                ]);
+
+                // 4. Merge Data (Use Highest Value from OpenMeteo, WAQI, or Worker)
                 const fullData = districts.map((district, index) => {
                     if (index < subset.length) {
-                        return { 
-                            ...data[index], 
-                            lat: district.lat, 
-                            lng: district.lng, 
-                            name: district.name 
+                        const omPoint = omData[index];
+                        const waqiPoint = waqiResults[index];
+                        let finalAqi = omPoint.current.us_aqi;
+                        const comparisonValues = [finalAqi];
+
+                        // Check WAQI
+                        if (waqiPoint && waqiPoint.status === 'ok') {
+                            const waqiVal = parseInt(waqiPoint.data.aqi);
+                            if (!isNaN(waqiVal)) comparisonValues.push(waqiVal);
+                        }
+                        
+                        // Check Worker (Applies to all districts if available)
+                        if (workerResult && workerResult.current && workerResult.current.aqi) {
+                             comparisonValues.push(workerResult.current.aqi);
+                        }
+
+                        // Take the highest value
+                        finalAqi = Math.max(...comparisonValues.filter(v => v !== null));
+                        
+                        // Store OpenMeteo Raw vs Final Max for scaling calculation later
+                        omPoint.rawOmAqi = omPoint.current.us_aqi; 
+                        omPoint.current.us_aqi = finalAqi;
+                        
+                        // Attach Worker Forecast Data to the first element only (to avoid duplication and use for forecast rendering)
+                        if (index === 0 && workerResult && workerResult.forecast) {
+                            omPoint.workerForecast = workerResult.forecast;
+                        }
+
+                        return {
+                            ...omPoint,
+                            lat: district.lat,
+                            lng: district.lng,
+                            name: district.name
                         };
                     }
-                    // Placeholder for non-fetched locations (for map display only)
-                    return { 
-                        current: { us_aqi: null }, 
-                        hourly: { time: [], us_aqi: [] }, 
-                        lat: district.lat, 
-                        lng: district.lng, 
-                        name: district.name 
-                    }; 
+                    // Placeholder for non-fetched locations
+                    return {
+                        current: {
+                            us_aqi: null
+                        },
+                        hourly: {
+                            time: [],
+                            us_aqi: []
+                        },
+                        lat: district.lat,
+                        lng: district.lng,
+                        name: district.name
+                    };
                 });
-                return fullData.filter(d => d.current.us_aqi !== null); // Only return fetched data for calculations
+                return fullData.filter(d => d.current.us_aqi !== null);
+
             } else {
-                 const lats = districts.map(d => d.lat).join(',');
-                 const lngs = districts.map(d => d.lng).join(',');
-                 const url = `${API_URL}?latitude=${lats}&longitude=${lngs}&current=us_aqi,pm10,pm2_5,nitrogen_dioxide,sulphur_dioxide,ozone,carbon_monoxide&hourly=us_aqi&timezone=Asia/Tehran&past_days=2&forecast_days=5`;
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('API Error');
-                return [await response.json()];
+                // Single Location Logic
+                const lats = districts.map(d => d.lat).join(',');
+                const lngs = districts.map(d => d.lng).join(',');
+                const omUrl = `${API_URL}?latitude=${lats}&longitude=${lngs}&current=us_aqi,pm10,pm2_5,nitrogen_dioxide,sulphur_dioxide,ozone,carbon_monoxide&hourly=us_aqi&timezone=Asia/Tehran&past_days=1&forecast_days=6`;
+
+                // Fetch Open-Meteo
+                const omResponse = await fetch(omUrl);
+                if (!omResponse.ok) throw new Error('API Error');
+                const omData = await omResponse.json();
+
+                // Fetch WAQI
+                const waqiResponse = await fetch(`${WAQI_URL}/geo:${districts[0].lat};${districts[0].lng}/?token=${WAQI_TOKEN}`).then(r => r.json()).catch(() => null);
+                
+                // Fetch Worker (Only if cityKey provided)
+                let workerResult = null;
+                if (cityKey && WORKER_API_URL && WORKER_API_URL !== "YOUR_WORKER_URL_HERE") {
+                    const slug = getWorkerCitySlug(cityKey);
+                    try {
+                        const wr = await fetch(`${WORKER_API_URL}?city=${slug}`);
+                        workerResult = await wr.json();
+                    } catch(e) { console.error(e); }
+                }
+
+                // Merge
+                let finalAqi = omData.current.us_aqi;
+                omData.rawOmAqi = finalAqi; // Save original
+                const comparisonValues = [finalAqi];
+
+                if (waqiResponse && waqiResponse.status === 'ok') {
+                    const waqiVal = parseInt(waqiResponse.data.aqi);
+                    if (!isNaN(waqiVal)) comparisonValues.push(waqiVal);
+                }
+                
+                if (workerResult && workerResult.current && workerResult.current.aqi) {
+                    comparisonValues.push(workerResult.current.aqi);
+                }
+                
+                omData.current.us_aqi = Math.max(...comparisonValues.filter(v => v !== null));
+                
+                // Attach forecast
+                if (workerResult && workerResult.forecast) {
+                    omData.workerForecast = workerResult.forecast;
+                }
+
+                return [omData];
             }
         }
 
@@ -1269,7 +1536,6 @@
         async function loadData(type, payload, saveToStorage = true) {
             loader.style.display = 'flex';
 
-            // Cleanup Map
             markers.forEach(m => map.removeLayer(m));
             markers = [];
             if (heatLayer) map.removeLayer(heatLayer);
@@ -1288,22 +1554,18 @@
                     centerLng = city.center[1];
                     currentCity = payload;
 
-                    // Save to localStorage
                     if (saveToStorage) {
                         saveLastLocation('city', payload);
                     }
 
-                    // NEW: Fit Bounds to see all locations
                     const bounds = L.latLngBounds(districtsToRender.map(d => [d.lat, d.lng]));
                     map.fitBounds(bounds, {
                         padding: [50, 50],
                         maxZoom: 14
                     });
-                    
-                    // Fetch data (using the subset logic in fetchMultiLocations)
-                    apiData = await fetchMultiLocations(districtsToRender);
-                    
-                    // Filter down to the districts that were actually fetched (10 for Tehran)
+
+                    apiData = await fetchMultiLocations(districtsToRender, payload);
+
                     const fetchedDistricts = apiData.map(data => ({
                         lat: data.lat,
                         lng: data.lng,
@@ -1324,22 +1586,20 @@
                     centerLng = payload.lng;
                     map.setView([centerLat, centerLng], 13);
                     const response = await fetchSingleLocation(payload.lat, payload.lng);
-                    apiData = [response];
+                    apiData = [response[0]];
                     currentCustomLoc = {
                         lat: payload.lat,
                         lng: payload.lng,
                         name: payload.name
                     };
 
-                    // Save to localStorage
                     if (saveToStorage) {
                         saveLastLocation('custom', payload);
                     }
-                    
-                    // Update currentDistrictsData for custom location
+
                     const aqi = apiData[0]?.current?.us_aqi;
-                    if(aqi) {
-                         currentDistrictsData = [{
+                    if (aqi) {
+                        currentDistrictsData = [{
                             lat: payload.lat,
                             lng: payload.lng,
                             aqi: aqi,
@@ -1355,29 +1615,30 @@
                 // Process Air Data
                 let totalCurrentAqi = 0;
                 let validCount = 0;
-                
+
                 currentDistrictsData.forEach(d => {
                     totalCurrentAqi += d.aqi;
                     validCount++;
                 });
 
-                // The first location's data (first index of apiData) is used for charts/pollutants
-                const firstLocationData = apiData[0]; 
-                
+                const firstLocationData = apiData[0];
+
                 // Render Map
                 renderMapLayer();
 
                 const avgAqi = validCount > 0 ? Math.round(totalCurrentAqi / validCount) : 0;
-                const dailyStats = calculateCityDailyStats(apiData);
 
                 // Update UI
                 updateDynamicBackground(avgAqi);
                 document.getElementById('health-city-name').textContent = displayTitle;
                 updateHealthWidget(avgAqi);
+                
                 if (firstLocationData) {
                     renderPollutants(firstLocationData.current, firstLocationData.current_units);
-                    renderDailyChart(dailyStats);
-                    generateSmartForecast(firstLocationData.hourly);
+                    // RENDER HOURLY FORECAST SCROLL (REPLACES SMART INSIGHT)
+                    renderHourlyForecast(firstLocationData.hourly, firstLocationData.current.us_aqi, firstLocationData.rawOmAqi);
+                    // RENDER DAILY FORECAST CARDS
+                    renderForecastCards(firstLocationData.hourly, firstLocationData.workerForecast);
                 }
                 document.getElementById('last-update').textContent = `بروزرسانی: ${new Date().toLocaleTimeString('fa-IR')}`;
 
@@ -1391,25 +1652,19 @@
 
         // --- Map Visualizers ---
         function renderMapLayer() {
-            // Clear layers
             markers.forEach(m => map.removeLayer(m));
             if (heatLayer) map.removeLayer(heatLayer);
 
             if (isHeatmapActive) {
-                // Ensure leaflet-heat loaded
-                if (typeof L.heatLayer !== 'function') {
-                    console.error("Heatmap plugin not loaded");
-                    alert("خطا در بارگذاری نقشه حرارتی");
-                    return;
-                }
+                if (typeof L.heatLayer !== 'function') return;
 
                 const maxVal = Math.max(...currentDistrictsData.map(d => d.aqi), 150);
 
                 const heatPoints = currentDistrictsData.map(d => [d.lat, d.lng, d.aqi]);
                 heatLayer = L.heatLayer(heatPoints, {
-                    radius: 50, // Larger radius for better visibility
+                    radius: 50,
                     blur: 30,
-                    minOpacity: 0.5, // Visible even at low intensity/zoom
+                    minOpacity: 0.5,
                     max: maxVal,
                     gradient: {
                         0.2: 'green',
@@ -1449,49 +1704,54 @@
         });
 
         // --- Renderers ---
-        function generateSmartForecast(hourly) {
-            const container = document.getElementById('smart-insight-section');
-            const msgEl = document.getElementById('insight-message');
-            container.style.display = 'block';
+        // NEW: Hourly Forecast Renderer (Replaces Smart Insight)
+        function renderHourlyForecast(hourly, currentMaxAqi, rawOmAqi) {
+            const section = document.getElementById('hourly-forecast-section');
+            const container = document.getElementById('hourly-container');
+            section.style.display = 'block';
+            container.innerHTML = '';
+            
             const now = new Date();
             let nowIndex = hourly.time.findIndex(t => new Date(t) > now);
             if (nowIndex === -1) nowIndex = 0;
-            const lookAhead = 12;
-            let bestAqi = 500,
-                bestTime = null,
-                worstAqi = 0;
-
-            for (let i = nowIndex; i < Math.min(nowIndex + lookAhead, hourly.time.length); i++) {
-                const val = hourly.us_aqi[i];
-                if (val !== null && val !== undefined) {
-                    if (val < bestAqi) {
-                        bestAqi = val;
-                        bestTime = hourly.time[i];
-                    }
-                    if (val > worstAqi) worstAqi = val;
+            
+            // "Use Highest Number" Logic for Hourly:
+            // If the Max Current AQI (from all sources) is significantly higher than the
+            // Open-Meteo prediction for right now, calculate an offset and apply it to the trend.
+            let offset = 0;
+            if (currentMaxAqi && rawOmAqi) {
+                 offset = Math.max(0, currentMaxAqi - rawOmAqi);
+            }
+            
+            const next12Hours = hourly.time.slice(nowIndex, nowIndex + 12);
+            
+            next12Hours.forEach((timeStr, i) => {
+                const idx = nowIndex + i;
+                let val = hourly.us_aqi[idx];
+                
+                // Apply offset to respect the "highest number" logic found in current data
+                if (val !== null) {
+                    val = Math.round(val + offset);
                 }
-            }
-
-            if (worstAqi > 150) {
-                msgEl.innerHTML = `⚠️ <b>هشدار:</b> کیفیت هوا در ۱۲ ساعت آینده ناسالم خواهد بود.`;
-                container.querySelector('.smart-insight-card').style.background = 'linear-gradient(135deg, #b91c1c 0%, #ef4444 100%)';
-            } else if (bestAqi < 100) {
-                const date = new Date(bestTime);
-                const timeStr = date.toLocaleTimeString('fa-IR', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-                msgEl.innerHTML = `✅ <b>بهترین زمان فعالیت:</b> ساعت ${timeStr} با شاخص ${bestAqi}.`;
-                container.querySelector('.smart-insight-card').style.background = 'linear-gradient(135deg, #059669 0%, #10b981 100%)';
-            } else {
-                msgEl.innerHTML = `ℹ️ کیفیت هوا متوسط است.`;
-                container.querySelector('.smart-insight-card').style.background = 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)';
-            }
+                
+                if (val !== null) {
+                    const date = new Date(timeStr);
+                    const timeDisplay = date.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
+                    const color = getAqiColor(val);
+                    
+                    const card = `
+                    <div class="hourly-card">
+                        <div class="hourly-time">${timeDisplay}</div>
+                        <div class="hourly-badge" style="background-color: ${color}">${val}</div>
+                    </div>
+                    `;
+                    container.innerHTML += card;
+                }
+            });
         }
 
         function updateWeatherUI(current) {
             document.getElementById('weather-container').style.display = 'flex';
-            // Ensure data is available before setting
             document.getElementById('temp-val').textContent = current?.temperature_2m || '--';
             document.getElementById('wind-val').textContent = current?.wind_speed_10m || '--';
             document.getElementById('humid-val').textContent = current?.relative_humidity_2m || '--';
@@ -1520,41 +1780,6 @@
             root.style.setProperty('--bg-grad-2', c2);
         }
 
-        function calculateCityDailyStats(apiData) {
-            if (!apiData || apiData.length === 0) return {
-                dates: [],
-                values: []
-            };
-            const dailyTotals = {};
-            apiData.forEach(location => {
-                const times = location.hourly?.time;
-                const aqis = location.hourly?.us_aqi;
-                if (!times || !aqis) return;
-                
-                times.forEach((timeStr, index) => {
-                    const aqi = aqis[index];
-                    if (aqi !== null && aqi !== undefined) {
-                        const dateKey = timeStr.split('T')[0];
-                        if (!dailyTotals[dateKey]) dailyTotals[dateKey] = {
-                            sum: 0,
-                            count: 0
-                        };
-                        dailyTotals[dateKey].sum += aqi;
-                        dailyTotals[dateKey].count++;
-                    }
-                });
-            });
-            const sortedDates = Object.keys(dailyTotals).sort();
-            const values = sortedDates.map(date => {
-                const dayData = dailyTotals[date];
-                return dayData.count > 0 ? Math.round(dayData.sum / dayData.count) : 0;
-            });
-            return {
-                dates: sortedDates,
-                values: values
-            };
-        }
-
         function getAqiColor(val) {
             if (val <= 50) return aqiColors.good;
             if (val <= 100) return aqiColors.moderate;
@@ -1562,6 +1787,15 @@
             if (val <= 200) return aqiColors.unhealthy;
             if (val <= 300) return aqiColors.veryUnhealthy;
             return aqiColors.hazardous;
+        }
+        
+        function getAqiStatus(val) {
+             if (val <= 50) return aqiText.good;
+            if (val <= 100) return aqiText.moderate;
+            if (val <= 150) return aqiText.sensitive;
+            if (val <= 200) return aqiText.unhealthy;
+            if (val <= 300) return aqiText.veryUnhealthy;
+            return aqiText.hazardous;
         }
 
         function renderPollutants(current, units) {
@@ -1595,13 +1829,13 @@
             pollutants.forEach(p => {
                 if (current && current[p.id] !== undefined && current[p.id] !== null) {
                     container.innerHTML += `
-                    <div class="bento-card">
-                        <div class="card-header"><span class="district-title">${p.name}</span></div>
-                        <div class="aqi-number" style="color:var(--text-main)">
-                            ${current[p.id]} <span class="unit-text">${units[p.id]}</span>
-                        </div>
-                        <div class="activity-label">${p.desc}</div>
-                    </div>`;
+                <div class="bento-card">
+                    <div class="card-header"><span class="district-title">${p.name}</span></div>
+                    <div class="aqi-number" style="color:var(--text-main)">
+                        ${current[p.id]} <span class="unit-text">${units[p.id]}</span>
+                    </div>
+                    <div class="activity-label">${p.desc}</div>
+                </div>`;
                 }
             });
         }
@@ -1666,82 +1900,63 @@
                     }
                 }
                 container.innerHTML += `
-                <div class="activity-card">
-                    <i class="fa-solid ${act.icon} activity-icon ${cls}"></i>
-                    <span class="activity-status ${cls}">${text}</span>
-                    <span class="activity-label">${act.label}</span>
-                </div>`;
+            <div class="activity-card">
+                <i class="fa-solid ${act.icon} activity-icon ${cls}"></i>
+                <span class="activity-status ${cls}">${text}</span>
+                <span class="activity-label">${act.label}</span>
+            </div>`;
             });
         }
 
-        function renderDailyChart(dataObj) {
-            const ctx = document.getElementById('aqiTrendChart').getContext('2d');
-            const labels = dataObj.dates.map(dateStr => {
-                const d = new Date(dateStr);
-                return d.toLocaleDateString('fa-IR', {
-                    weekday: 'long'
-                });
-            });
-            if (trendChartInstance) trendChartInstance.destroy();
-
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)';
-            const textColor = isDark ? '#94a3b8' : '#64748b';
-
-            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, 'rgba(37,99,235,0.5)');
-            gradient.addColorStop(1, 'rgba(37,99,235,0)');
-            trendChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'میانگین AQI',
-                        data: dataObj.values,
-                        borderColor: '#2563eb',
-                        backgroundColor: gradient,
-                        borderWidth: 3,
-                        tension: 0.4,
-                        fill: true,
-                        pointRadius: 4,
-                        pointBackgroundColor: isDark ? '#0f172a' : '#fff',
-                        pointBorderColor: '#2563eb'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: gridColor
-                            },
-                            ticks: {
-                                font: {
-                                    family: 'Vazirmatn'
-                                },
-                                color: textColor
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                font: {
-                                    family: 'Vazirmatn'
-                                },
-                                color: textColor
-                            }
-                        }
+        // --- NEW: Daily Forecast Cards Renderer ---
+        function renderForecastCards(hourlyData, workerForecast) {
+            const container = document.getElementById('forecast-container');
+            container.innerHTML = '';
+            
+            // 1. Group Open-Meteo Hourly by Day to find Max AQI per day
+            const dailyMax = {};
+            if (hourlyData && hourlyData.time) {
+                hourlyData.time.forEach((t, i) => {
+                    const dateKey = t.split('T')[0];
+                    const val = hourlyData.us_aqi[i];
+                    if (val !== null) {
+                        if (!dailyMax[dateKey]) dailyMax[dateKey] = 0;
+                        if (val > dailyMax[dateKey]) dailyMax[dateKey] = val;
                     }
+                });
+            }
+
+            const sortedDates = Object.keys(dailyMax).sort();
+            
+            // Limit to next 5 available days
+            const daysToShow = sortedDates.slice(0, 4);
+
+            daysToShow.forEach((dateStr, index) => {
+                let finalAqi = dailyMax[dateStr];
+
+                // 2. Compare with Worker Forecast (Matched by index)
+                if (workerForecast && workerForecast[index]) {
+                     const workerVal = workerForecast[index].aqi;
+                     if (workerVal && workerVal > finalAqi) {
+                         finalAqi = workerVal;
+                     }
                 }
+                
+                const dateObj = new Date(dateStr);
+                const dayName = dateObj.toLocaleDateString('fa-IR', { weekday: 'long' });
+                const fullDate = dateObj.toLocaleDateString('fa-IR', { month: 'long', day: 'numeric' });
+                const color = getAqiColor(finalAqi);
+                const status = getAqiStatus(finalAqi);
+
+                const cardHTML = `
+                <div class="forecast-card">
+                    <div class="forecast-date">${dayName}</div>
+                    <div class="forecast-day">${fullDate}</div>
+                    <div class="forecast-aqi-badge" style="background-color: ${color}">${finalAqi}</div>
+                    <div class="forecast-status">${status}</div>
+                </div>
+                `;
+                container.innerHTML += cardHTML;
             });
         }
 
@@ -1803,7 +2018,7 @@
 
         document.getElementById('bookmark-btn').addEventListener('click', () => {
             let locToSave = null;
-            
+
             if (currentCustomLoc) {
                 locToSave = currentCustomLoc;
             } else if (cityData[currentCity]) {
@@ -1833,8 +2048,8 @@
 
         document.getElementById('big-share-btn').addEventListener('click', () => {
             const city = document.getElementById('health-city-name').textContent;
-            const insight = document.getElementById('insight-message').textContent;
-            const text = `🌍 گزارش کیفیت هوا - ${city}\n${insight}\nمشاهده در سامانه هوشمند`;
+            // Removed Insight message from here since the section is gone
+            const text = `🌍 گزارش کیفیت هوا - ${city}\nمشاهده در سامانه هوشمند`;
             navigator.clipboard.writeText(text).then(() => alert('گزارش کپی شد!'));
         });
 
@@ -1866,7 +2081,6 @@
             });
         });
 
-        // Refresh button handlers (both header and map)
         function handleRefresh() {
             const val = document.getElementById('city-dropdown').value;
             if (val.startsWith('bookmark-')) {
@@ -1891,13 +2105,8 @@
 
         // --- Initialize App ---
         function initApp() {
-            // Initialize theme first
             initTheme();
-
-            // Render city selector
             renderCitySelector();
-
-            // Check for saved location
             const lastLocation = getLastLocation();
 
             if (lastLocation) {
@@ -1906,25 +2115,21 @@
                     loadData('city', lastLocation.data, false);
                 } else if (lastLocation.type === 'custom' && lastLocation.data) {
                     document.getElementById('custom-opt').hidden = false;
-                    // Note: If last location was a bookmark, we need to find its index to set the dropdown correctly
                     const bookmarkIndex = savedBookmarks.findIndex(bm => bm.lat === lastLocation.data.lat && bm.lng === lastLocation.data.lng);
                     if (bookmarkIndex !== -1) {
-                         renderCitySelector(`bookmark-${bookmarkIndex}`);
+                        renderCitySelector(`bookmark-${bookmarkIndex}`);
                     } else {
-                         renderCitySelector('custom');
+                        renderCitySelector('custom');
                     }
                     loadData('custom', lastLocation.data, false);
                 } else {
-                    // Fallback to Tehran
                     loadData('city', 'tehran');
                 }
             } else {
-                // Default to Tehran
                 loadData('city', 'tehran');
             }
         }
 
-        // Start the app
         initApp();
     </script>
 </body>
